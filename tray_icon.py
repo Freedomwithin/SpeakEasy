@@ -60,7 +60,7 @@ def init_tray():
             item("🎙️ Control Center", open_control_gui),
             item("⚡ Toggle Dictation", toggle_dictation_service),
             item("⚙️ Settings Manager", open_settings_gui),
-            Menu.separator(),
+            Menu.SEPARATOR,
             item("✕ Quit SpeakEasy", quit_application)
         )
 
