@@ -2,6 +2,12 @@
 
 All notable changes to SpeakEasy will be documented in this file.
 
+## [1.2.3] - 2026-08-13
+
+### Fixed
+- **System Tray Icon** - Fixed `Menu.separator()` → `Menu.SEPARATOR` compatibility issue that prevented the tray icon from appearing on some systems
+- **Parcellite Compatibility** - Verified SpeakEasy works smoothly with Parcellite clipboard manager
+
 ## [1.2.2] - 2026-08-13
 
 ### Added
