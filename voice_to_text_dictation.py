@@ -140,7 +140,7 @@ class SpeakEasyDictation:
             ):
                 set_tray_state(True)
                 speak("Dictation started")
-                self.send_notification("SpeakEasy", "🎤 Dictation Active - Speak Now")
+                self.send_notification("SpeakEasy", "🎤 DICTATION ON — Speak now. Press Super+V to stop.", timeout=4000)
 
                 self.model = Model(str(MODEL_PATH))
                 self.recognizer = KaldiRecognizer(self.model, SAMPLE_RATE)
@@ -164,6 +164,7 @@ class SpeakEasyDictation:
         finally:
             set_tray_state(False)
             speak("Dictation stopped")
+            self.send_notification("SpeakEasy", "🛑 DICTATION OFF — Microphone closed.", timeout=2000)
 
 if __name__ == "__main__":
     typer = SpeakEasyDictation()

@@ -37,7 +37,7 @@ releases/
 # Config (user-specific, keep example)
 *.user.json
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
+# Marketing and internal notes
+Marketing/
+/Marketing/
+
