@@ -1,0 +1,43 @@
+# Virtual Environment
+venv/
+.env/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.tmp
+
+# AppImage build artifacts (keep the final AppImage though)
+AppDir/
+*.AppImage
+!SpeakEasy-x86_64.AppImage
+
+# Release builds
+releases/
+*.tar.gz
+*.zip
+
+# Config (user-specific, keep example)
+*.user.json
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
