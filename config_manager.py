@@ -10,7 +10,7 @@ DEFAULT_CONFIG = {
     "sample_rate": 16000,
     "block_size": 4000,
     "aggressive_comma_fix": True,
-    "voice_feedback": True,
+    "voice_feedback": False,
     "tray_enabled": True,
     "active_model": "vosk-model-small-en-us-0.15",
     "capitalize_words": {
