@@ -1,3 +1,5 @@
 vosk
 sounddevice
 pynput
+pystray
+Pillow
