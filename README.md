@@ -4,14 +4,18 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![AppImage](https://img.shields.io/badge/AppImage-Download-green.svg)](https://github.com/Freedomwithin/SpeakEasy/releases/latest)
 
-Offline voice tools for low-spec Linux systems. Built for Intel Pentium Silver N6000 and similar CPUs.
+Offline voice tools for low-spec Linux systems. Built and tested on an Intel Pentium Silver N6000 laptop with integrated Intel UHD Graphics.
 
 ## Overview
 
-SpeakEasy provides two complementary voice-controlled tools that run entirely offline using the Vosk speech recognition engine. No cloud services, no GPU requirements, no network dependency.
+SpeakEasy is a lightweight, offline voice-control tool built for Linux systems where heavier speech-recognition solutions may be impractical. It uses the Vosk speech recognition engine locally, so normal dictation does not require cloud services, a dedicated GPU, or an internet connection.
+
+It provides two complementary tools:
 
 - **Dictation**: Voice-to-text typing with punctuation commands and automatic capitalization
 - **Program Launcher**: Voice-activated application launcher for common tools and utilities
+
+The project started because I was using a Pentium Silver N6000 laptop after my main machine died. I wanted voice input, but the solutions I found either depended on cloud services, wanted a dedicated GPU, or were expensive. SpeakEasy is my attempt to make useful voice control practical on modest Linux hardware.
 
 ![SpeakEasy Settings GUI](SpeakEasy_Settings.png)
 
@@ -47,7 +51,7 @@ SpeakEasy hits the sweet spot: lightweight, dual-purpose, hotkey-driven, and act
 
 ## Features
 
-- ✅ **100% Offline** - No cloud, no data sent anywhere
+- ✅ **100% Offline** - Speech recognition runs locally; no cloud service is required
 - ✅ **System Tray Icon** - Green/red status indicator
 - ✅ **GUI Settings Manager** - Add/edit/delete commands without touching code
 - ✅ **Category Organization** - Apps, Browsers, Terminals, Files, Media, Dev Tools, Utilities, Web, Custom
@@ -61,28 +65,52 @@ SpeakEasy hits the sweet spot: lightweight, dual-purpose, hotkey-driven, and act
 
 ## Requirements
 
+### Standalone AppImage
+
+- 64-bit Linux (`x86_64`)
+- Working microphone
+- 4GB+ RAM recommended
+- No Python environment or virtualenv setup required
+
+### From Source
+
 - Linux (tested on Mint 22.3 Zena / Cinnamon)
 - Python 3.8+
 - Microphone (PipeWire or PulseAudio)
 - 4GB+ RAM recommended (model loads ~40MB into memory)
 - Optional: espeak (for voice feedback), zenity (for GUI dialogs)
 
-## Quick Install
+## Quick Start — AppImage
+
+The easiest way to try SpeakEasy is the standalone AppImage. It does not require cloning the repository, creating a virtual environment, or installing Python dependencies.
+
+Download the latest release:
 
 ```bash
-git clone https://github.com/Freedomwithin/SpeakEasy
-cd SpeakEasy
-./install.sh
+wget https://github.com/Freedomwithin/SpeakEasy/releases/latest/download/SpeakEasy-x86_64.AppImage
+chmod +x SpeakEasy-x86_64.AppImage
+./SpeakEasy-x86_64.AppImage
 ```
 
-The install script will:
-- Create a Python virtual environment
-- Install all dependencies
-- Check for optional packages (espeak, zenity)
-- Make scripts executable
-- Verify the Vosk model is present
+You can also download the latest release from the [GitHub Releases page](https://github.com/Freedomwithin/SpeakEasy/releases/latest).
 
-## Manual Installation
+### Important: Dictation is Toggle-Based
+
+SpeakEasy does **not** currently have a wake word or automatic voice activity detection.
+
+For dictation:
+
+1. Press **Super + V** to start listening.
+2. Speak.
+3. Press **Super + V again** to stop listening.
+
+**Stop dictation when you are finished speaking.** While dictation is active, the microphone remains open and speech from the environment can be recognized and typed. This includes background conversations, TV audio, keyboard noise, or short words such as "huh."
+
+If you leave dictation running while you are not actively speaking, unexpected text may be inserted into the active application.
+
+## Installation From Source
+
+For development or if you want to run the Python scripts directly:
 
 ```bash
 # Create and activate virtual environment
@@ -104,6 +132,8 @@ chmod +x Program_Launcher/start_voice_assistant.sh
 **Hotkey:** Super + V
 
 Speak naturally and your words are typed into the active window. The engine ignores live partial recognition and only types finalized phrases.
+
+**Important:** Dictation is active continuously between the start and stop hotkeys. There is currently no wake word or noise gate. Always press **Super + V** again when you are finished.
 
 **Features:**
 - Spoken punctuation: "period", "comma", "question mark", "exclamation point", "new line", "new paragraph", "open paren", "close paren", "semicolon", "colon", "hyphen", "dash"
@@ -282,9 +312,22 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 - The Vosk small model uses phonetic recognition with no grammar layer
 - "Comma" is frequently misheard as "come on" (toggleable fix included)
-- No wake word or noise gate - the microphone stays open when active
-- Background noise may be transcribed (stop dictation when not in use)
+- **No wake word yet** - dictation is started/stopped with Super+V
+- **No noise gate yet** - background speech, TV audio, keyboard noise, and other sounds may be transcribed while dictation is active
+- The microphone remains open while dictation is active; stop it when you are finished
 - Voice feedback requires espeak or spd-say installed
+- Tested primarily on Linux Mint 22.3 Cinnamon/X11; other desktop environments may work but have not all been tested
+
+### Reported AppImage Issue
+
+A user reported that running the AppImage unexpectedly cleared their clipboard and that the AppImage file subsequently disappeared. I have **not reproduced this behavior yet**, so it is not currently known whether it is caused by SpeakEasy, the user's environment, or another system issue.
+
+If you encounter anything similar, please open an issue with:
+- Linux distribution and version
+- Desktop environment and display server (X11/Wayland)
+- SpeakEasy version
+- How the AppImage was launched
+- Any terminal output or relevant system logs
 
 ## Troubleshooting
 
@@ -314,13 +357,36 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 - Install espeak: `sudo apt install espeak`
 - Or spd-say: `sudo apt install speech-dispatcher`
 
+## AI Development Disclosure
+
+AI tools were used as a development aid while building and documenting SpeakEasy. The project is still tested and evaluated by the author on real hardware, and AI assistance should not be taken as a guarantee that every feature works correctly on every Linux configuration.
+
+## Feedback and Testing
+
+SpeakEasy was built primarily for older and low-spec Linux hardware. Feedback is especially useful from people running it on:
+- Older Intel or AMD CPUs
+- 4GB RAM systems
+- Integrated graphics
+- Linux Mint and other lightweight Linux configurations
+
+If you find a bug, please include your hardware, Linux distribution/version, desktop environment, and whether you were using the AppImage or source installation.
+
 ## License
 
 MIT License - See LICENSE file for details.
 
 ## Hardware Notes
 
-SpeakEasy is optimized for low-power systems:
+The primary development/test machine is a budget laptop running Linux Mint 22.3 Zena:
+
+- **CPU:** Intel Pentium Silver N6000 (4 cores, up to 1.1GHz)
+- **Graphics:** Integrated Intel UHD Graphics
+- **RAM:** 4GB+ (the Vosk model itself uses roughly 40MB)
+- **Audio:** PipeWire 1.0.5 or PulseAudio
+- **GPU:** No dedicated GPU required
+- **Packaging:** Standalone x86_64 AppImage available
+
+SpeakEasy is intended to remain useful on low-power systems:
 - **CPU:** Intel Pentium Silver N6000 (4 cores, 800MHz-1.1GHz)
 - **RAM:** 4GB+ (model loads ~40MB into memory)
 - **Audio:** PipeWire 1.0.5 or PulseAudio
