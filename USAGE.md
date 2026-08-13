@@ -23,7 +23,7 @@ cd SpeakEasy
 
 ## Control Center GUI
 
-![SpeakEasy Control Center](assets/SpeakEasy_Control_Center.png)
+<p align="center"><img src="assets/SpeakEasy_Control_Center.png" width="480" alt="SpeakEasy Control Center"></p>
 
 When you launch SpeakEasy, you'll see a dark indigo window with:
 
@@ -99,7 +99,7 @@ Click **🎯 Launch Applications** in the Control Center, or press Super+A (if s
 
 ## Settings Manager
 
-![SpeakEasy Settings GUI](assets/SpeakEasy_Settings.png)
+<p align="center"><img src="assets/SpeakEasy_Settings.png" width="480" alt="SpeakEasy Settings GUI"></p>
 
 Click **⚙️ Settings Manager** in the Control Center.
 

@@ -17,9 +17,9 @@ It provides two complementary tools:
 
 The project started because I was using a Pentium Silver N6000 laptop after my main machine died. I wanted voice input, but the solutions I found either depended on cloud services, wanted a dedicated GPU, or were expensive. SpeakEasy is my attempt to make useful voice control practical on modest Linux hardware.
 
-![SpeakEasy Settings GUI](assets/SpeakEasy_Settings.png)
+<p align="center"><img src="assets/SpeakEasy_Settings.png" width="480" alt="SpeakEasy Settings GUI"></p>
 
-![SpeakEasy Control Center](assets/SpeakEasy_Control_Center.png)
+<p align="center"><img src="assets/SpeakEasy_Control_Center.png" width="480" alt="SpeakEasy Control Center"></p>
 
 ## What Makes SpeakEasy Unique
 
