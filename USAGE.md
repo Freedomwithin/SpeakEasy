@@ -2,7 +2,7 @@
 
 ## Quick Start
 
-### Install
+### AppImage (Recommended)
 
 ```bash
 # Download the AppImage
@@ -10,6 +10,8 @@ wget https://github.com/Freedomwithin/SpeakEasy/releases/latest/download/SpeakEa
 chmod +x SpeakEasy-x86_64.AppImage
 ./SpeakEasy-x86_64.AppImage
 ```
+
+The **Control Center GUI** will open automatically.
 
 ### From Source
 
@@ -19,49 +21,87 @@ cd SpeakEasy
 ./install.sh
 ```
 
-## Three Modes
+## Control Center GUI
 
-### 1. Dictation Mode (Default)
+When you launch SpeakEasy, you'll see a dark indigo window with:
 
-**Start:** Double-click AppImage or `./SpeakEasy-x86_64.AppImage`
+| Button | Action |
+|--------|--------|
+| **▶ Start Dictation** | Begin voice-to-text typing |
+| **⏹ Stop Dictation** | Stop listening |
+| **🎯 Launch Applications** | Open the program launcher |
+| **⚙️ Settings Manager** | Customize commands |
+| **✕ Quit App** | Exit SpeakEasy |
 
-**Hotkey:** Super + V (toggle on/off)
+### System Tray Menu
 
-**Features:**
+Right-click the tray icon for quick access:
+- **Control Center** - Open the GUI
+- **Toggle Dictation** - Start/stop dictation
+- **Settings Manager** - Customize commands
+- **Quit SpeakEasy** - Exit
+
+## Hotkeys (Optional)
+
+If you want keyboard shortcuts, set them up in your desktop environment:
+
+| Hotkey | Action |
+|--------|--------|
+| Super + V | Toggle Dictation |
+| Super + A | Open Launcher |
+
+**Note:** Hotkeys are optional — the Control Center GUI works without them!
+
+## Dictation Features
+
+Speak naturally and your words are typed into the active window.
+
+**Punctuation Commands:**
 - "period" → .
 - "comma" → ,
 - "question mark" → ?
+- "exclamation point" → !
 - "new line" → \n
 - "new paragraph" → \n\n
-- Auto-capitalization
-- "come on" → , (if Comma Fix enabled)
+- "open paren" → (
+- "close paren" → )
+- "semicolon" → ;
+- "colon" → :
+- "hyphen" → -
+- "dash" → -
 
-### 2. Program Launcher Mode
+**Auto-capitalization:**
+- Sentences start with capital letters
+- "I" is automatically capitalized
+- "I'm", "I'll", "I've" are capitalized
 
-**Start:** `./SpeakEasy-x86_64.AppImage --launcher`
+## Program Launcher
 
-**Hotkey:** Super + A
+Click **🎯 Launch Applications** in the Control Center, or press Super+A (if set up).
 
 **Usage:**
-1. Press Super + A
-2. Say "sublime" or "open sublime"
-3. App launches automatically
+1. Say an application name
+2. The app launches automatically
 
 **Default Apps:**
-- sublime, brave, kitty, nemo, files
-- firefox, chrome, gimp, spotify
+- Browsers: Brave, Firefox, Chrome, Chromium
+- Terminals: Kitty, Terminal, Alacritty
+- Text Editors: Sublime, Gedit, Vim, Neovim, VS Code
+- File Managers: Nemo, Nautilus, Thunar
+- Creative: GIMP, Inkscape, Spotify, VLC
+- Utilities: Calculator, Calendar, System Monitor, Disk Utility, Screenshot
+- Web Apps: Google, GitHub, Gmail, Drive, YouTube, Reddit, Google Docs
 
 **Dynamic Search:**
-- Say "google [query]" for web search
+- Say "google [query]" to search the web
 
-### 3. Settings GUI Mode
+## Settings Manager
 
-**Start:** `./SpeakEasy-x86_64.AppImage --settings`
+Click **⚙️ Settings Manager** in the Control Center.
 
 **Features:**
 - Add/Edit/Delete commands
 - Category organization
-- Toggle Voice Feedback
 - Toggle Comma Fix
 - Toggle Tray Icon
 
@@ -69,7 +109,7 @@ cd SpeakEasy
 
 ### Add New Commands
 
-1. Open Settings GUI: `./SpeakEasy-x86_64.AppImage --settings`
+1. Open Settings Manager
 2. Click "Add New Command"
 3. Enter phrase, command, category
 4. Click Save
@@ -87,7 +127,7 @@ cd SpeakEasy
     "open myapp": ["/path/to/app"]
   },
   "aggressive_comma_fix": true,
-  "voice_feedback": true,
+  "voice_feedback": false,
   "tray_enabled": true
 }
 ```
@@ -99,17 +139,18 @@ cd SpeakEasy
 | Microphone not working | Check `arecord -l` |
 | Model not found | Ensure `vosk-model-small-en-us-0.15/` exists |
 | Tray icon not showing | Install pystray: `pip install pystray Pillow` |
-| Voice feedback not working | Install espeak: `sudo apt install espeak` |
-| "Command not understood" | Check phrase in Settings GUI |
+| "Command not understood" | Check phrase in Settings Manager |
+| White/blank GUI | Install customtkinter: `pip install customtkinter` |
 
-## Keyboard Shortcuts
+## Keyboard Shortcuts (in Settings Manager)
 
 | Shortcut | Action |
 |----------|--------|
-| Super + V | Toggle Dictation |
-| Super + A | Start Launcher |
-| Ctrl + S | Save config (in Settings) |
-| Ctrl + Z | Undo (in Settings) |
+| Ctrl + S | Save config |
+| Ctrl + Z | Undo |
+| Ctrl + N | New command |
+| Ctrl + Q | Quit |
+| Escape | Clear selection |
 
 ## Advanced
 

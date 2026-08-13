@@ -26,11 +26,9 @@ The project started because I was using a Pentium Silver N6000 laptop after my m
 | **Offline-first** | ✅ 100% local | Mixed — many require cloud |
 | **VOSK lightweight** | ✅ Optimized for low-spec | Often use heavier Whisper models |
 | **Dual-purpose** | ✅ Dictation + Launcher | Usually one or the other |
-| **Hotkey toggles** | ✅ Super+V / Super+A | Often require GUI or always-on |
-| **Clean Phrase Dump** | ✅ No double-typing | Many tools struggle with this |
+| **Control Center GUI** | ✅ One-click controls | Terminal-only or hotkey-only |
 | **System Tray** | ✅ Visual status indicator | Most lack this |
 | **GUI Settings** | ✅ No-code customization | Requires editing config files |
-| **Voice Feedback** | ✅ Audio confirmations | Silent or terminal-only |
 | **Category Organization** | ✅ Apps, Browsers, Dev Tools, etc. | Flat, unorganized lists |
 | **Pentium Silver N6000** | ✅ Tested and working | Most assume modern hardware |
 | **Linux-first** | ✅ Native Linux | Often Windows/Mac first |
@@ -47,18 +45,19 @@ SpeakEasy was built because existing solutions were either too heavy, too simple
 | **Cloud STT** | Web-based transcription | 100% offline, privacy-first |
 | **Speech Note** | Note-taking + translation | Simpler, dual-purpose (dictation + launcher) |
 
-SpeakEasy hits the sweet spot: lightweight, dual-purpose, hotkey-driven, and actually tested on low-end hardware.
+SpeakEasy hits the sweet spot: lightweight, dual-purpose, GUI-driven, and actually tested on low-end hardware.
 
 ## Features
 
 - ✅ **100% Offline** - Speech recognition runs locally; no cloud service is required
-- ✅ **System Tray Icon** - Green/red status indicator
+- ✅ **Control Center GUI** - Dark indigo visual window to start/stop dictation with one click
+- ✅ **Launch Applications Button** - One-click access to the program launcher from the Control Center
+- ✅ **System Tray Icon & Menu** - Visual status indicator with right-click menu controls
 - ✅ **GUI Settings Manager** - Add/edit/delete commands without touching code
 - ✅ **Category Organization** - Apps, Browsers, Terminals, Files, Media, Dev Tools, Utilities, Web, Custom
-- ✅ **Voice Feedback** - Audio confirmations for actions
 - ✅ **GUI Error Dialogs** - User-friendly error messages
 - ✅ **JSON Configuration** - Easy to backup and share
-- ✅ **Hotkey Toggle** - Super+V for dictation, Super+A for launcher
+- ✅ **Hotkey Toggle** - Super+V for dictation, Super+A for launcher (optional)
 - ✅ **Punctuation Commands** - Speak "period", "comma", "new line", etc.
 - ✅ **Auto-capitalization** - Sentences and "I" are properly capitalized
 - ✅ **Clean Phrase Dump** - No double-typing or text corruption
@@ -78,7 +77,7 @@ SpeakEasy hits the sweet spot: lightweight, dual-purpose, hotkey-driven, and act
 - Python 3.8+
 - Microphone (PipeWire or PulseAudio)
 - 4GB+ RAM recommended (model loads ~40MB into memory)
-- Optional: espeak (for voice feedback), zenity (for GUI dialogs)
+- Optional: zenity (for GUI dialogs)
 
 ## Quick Start — AppImage
 
@@ -94,15 +93,37 @@ chmod +x SpeakEasy-x86_64.AppImage
 
 You can also download the latest release from the [GitHub Releases page](https://github.com/Freedomwithin/SpeakEasy/releases/latest).
 
+### Control Center GUI
+
+When you launch the AppImage, you'll see the **SpeakEasy Control Center**:
+
+| Button | Action |
+|--------|--------|
+| **▶ Start Dictation** | Begin voice-to-text typing |
+| **⏹ Stop Dictation** | Stop listening |
+| **🎯 Launch Applications** | Open the program launcher |
+| **⚙️ Settings Manager** | Customize commands |
+| **✕ Quit App** | Exit SpeakEasy |
+
+**No hotkey setup required to get started!** Everything works with buttons.
+
+### System Tray Menu
+
+Right-click the tray icon for quick access:
+- **Control Center** - Open the GUI
+- **Toggle Dictation** - Start/stop dictation
+- **Settings Manager** - Customize commands
+- **Quit SpeakEasy** - Exit
+
 ### Important: Dictation is Toggle-Based
 
 SpeakEasy does **not** currently have a wake word or automatic voice activity detection.
 
 For dictation:
 
-1. Press **Super + V** to start listening.
+1. Click **Start Dictation** in the Control Center (or press Super+V if set up)
 2. Speak.
-3. Press **Super + V again** to stop listening.
+3. Click **Stop Dictation** (or press Super+V again).
 
 **Stop dictation when you are finished speaking.** While dictation is active, the microphone remains open and speech from the environment can be recognized and typed. This includes background conversations, TV audio, keyboard noise, or short words such as "huh."
 
@@ -113,6 +134,10 @@ If you leave dictation running while you are not actively speaking, unexpected t
 For development or if you want to run the Python scripts directly:
 
 ```bash
+# Clone the repository
+git clone https://github.com/Freedomwithin/SpeakEasy
+cd SpeakEasy
+
 # Create and activate virtual environment
 python3 -m venv venv
 source venv/bin/activate
@@ -123,33 +148,33 @@ pip install -r requirements.txt
 # Make scripts executable
 chmod +x voice_to_text_dictation.sh
 chmod +x Program_Launcher/start_voice_assistant.sh
+chmod +x control_gui.py
 ```
 
 ## Tools
 
 ### 1. Dictation Engine
 
-**Hotkey:** Super + V
+**Access:** Click **Start Dictation** in the Control Center (or Super+V if set up)
 
 Speak naturally and your words are typed into the active window. The engine ignores live partial recognition and only types finalized phrases.
 
-**Important:** Dictation is active continuously between the start and stop hotkeys. There is currently no wake word or noise gate. Always press **Super + V** again when you are finished.
+**Important:** Dictation is active continuously between the start and stop buttons. There is currently no wake word or noise gate. Always click **Stop Dictation** when you are finished.
 
 **Features:**
 - Spoken punctuation: "period", "comma", "question mark", "exclamation point", "new line", "new paragraph", "open paren", "close paren", "semicolon", "colon", "hyphen", "dash"
 - Automatic capitalization of sentences and "I"
 - Toggleable fix for Vosk mishearing "comma" as "come on"
 - System tray shows green when active
-- Voice confirmation: "Dictation started" / "Dictation stopped"
 
 **Usage:**
-- Press Super + V to start dictation
+- Click **Start Dictation** in the Control Center
 - Speak clearly into your microphone
-- Press Super + V again to stop
+- Click **Stop Dictation** when finished
 
 ### 2. Program Launcher
 
-**Hotkey:** Super + A
+**Access:** Click **🎯 Launch Applications** in the Control Center (or Super+A if set up)
 
 Speak an application name and it launches immediately. The launcher listens once, executes the command, and exits.
 
@@ -166,11 +191,7 @@ Speak an application name and it launches immediately. The launcher listens once
 
 ## GUI Settings Manager
 
-Launch the GUI settings manager:
-
-```bash
-python3 settings_gui.py
-```
+**Access:** Click **⚙️ Settings Manager** in the Control Center
 
 **Features:**
 - **Category Tabs**: Apps, Browsers, Terminals, Files, Media, Dev Tools, Utilities, Web, Custom
@@ -178,12 +199,16 @@ python3 settings_gui.py
 - **Add new commands**: Enter phrase, command path, select category
 - **Edit existing commands**: Modify any field
 - **Delete commands**: Remove unwanted entries
-- **Settings toggles**: Voice Feedback, Comma Fix, Tray Icon
+- **Settings toggles**: Comma Fix, Tray Icon
 - **One-click save**: Changes saved to `~/.config/speakeasy/config.json`
 
 ![SpeakEasy Settings GUI](SpeakEasy_Settings.png)
 
-## Hotkey Configuration (Cinnamon)
+## Hotkey Configuration (Optional)
+
+If you want keyboard shortcuts, set them up in your desktop environment:
+
+### Cinnamon
 
 1. Open Menu → Keyboard → Shortcuts → Custom Shortcuts
 2. Click "Add custom shortcut" (or edit existing ones)
@@ -191,21 +216,33 @@ python3 settings_gui.py
 
 **Dictation (Super+V):**
 - Name: "SpeakEasy Dictation"
-- Command: `/home/username/Software/Github/SpeakEasy/voice_to_text_dictation.sh`
+- Command: `/path/to/SpeakEasy/voice_to_text_dictation.sh`
 - Key: Super + V
 
 **Program Launcher (Super+A):**
 - Name: "SpeakEasy Launcher"
-- Command: `/home/username/Software/Github/SpeakEasy/Program_Launcher/start_voice_assistant.sh`
+- Command: `/path/to/SpeakEasy/Program_Launcher/start_voice_assistant.sh`
 - Key: Super + A
 
-*Replace `/home/username/Software/Github/SpeakEasy/` with the actual path where you cloned the repository.*
+### GNOME
+
+1. Open Settings → Keyboard → Keyboard Shortcuts
+2. Scroll to Custom Shortcuts → Click +
+3. Configure as above.
+
+### KDE
+
+1. Open System Settings → Shortcuts → Custom Shortcuts
+2. Edit → New → Global Shortcut → Command/URL
+3. Configure as above.
+
+**Note:** Hotkeys are **optional** — the Control Center GUI works without them!
 
 ## Customizing Commands
 
 ### Method 1: GUI Settings (Recommended)
 
-Run `python3 settings_gui.py` to add, edit, or delete commands visually with category organization.
+Click **⚙️ Settings Manager** in the Control Center to add, edit, or delete commands visually with category organization.
 
 ### Method 2: Edit Config File
 
@@ -267,6 +304,7 @@ SpeakEasy/
 │   └── start_voice_assistant.sh     # Super+A trigger script
 ├── voice_to_text_dictation.py       # Dictation engine
 ├── voice_to_text_dictation.sh       # Super+V toggle script
+├── control_gui.py                   # Control Center GUI (launched on startup)
 ├── config_manager.py                # JSON config loader/saver
 ├── settings_gui.py                  # GUI settings manager
 ├── tray_icon.py                     # System tray status indicator
@@ -274,7 +312,9 @@ SpeakEasy/
 ├── vosk-model-small-en-us-0.15/     # Vosk speech recognition model
 ├── requirements.txt                 # Python dependencies
 ├── install.sh                       # One-click installer
+├── build_appimage.sh                # AppImage builder script
 ├── CHANGELOG.md                     # Version history
+├── USAGE.md                         # Detailed usage guide
 └── README.md                        # This file
 ```
 
@@ -298,7 +338,7 @@ The program launcher uses a "Fast Start" pattern:
 Settings are stored in `~/.config/speakeasy/config.json`:
 - `voice_commands`: Dictionary of command phrases to actions
 - `aggressive_comma_fix`: Convert "come on" to ","
-- `voice_feedback`: Enable/disable audio feedback
+- `voice_feedback`: Enable/disable audio feedback (deprecated - now always false)
 - `tray_enabled`: Enable/disable system tray
 - `active_model`: Which Vosk model to use
 - `capitalize_words`: Custom capitalization rules
@@ -311,10 +351,9 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 - The Vosk small model uses phonetic recognition with no grammar layer
 - "Comma" is frequently misheard as "come on" (toggleable fix included)
-- **No wake word yet** - dictation is started/stopped with Super+V
+- **No wake word yet** - dictation is started/stopped with buttons or Super+V
 - **No noise gate yet** - background speech, TV audio, keyboard noise, and other sounds may be transcribed while dictation is active
 - The microphone remains open while dictation is active; stop it when you are finished
-- Voice feedback requires espeak or spd-say installed
 - Tested primarily on Linux Mint 22.3 Cinnamon/X11; other desktop environments may work but have not all been tested
 
 ### Reported AppImage Issue
@@ -336,12 +375,13 @@ If you encounter anything similar, please open an issue with:
 - Run the script directly: `python3 voice_to_text_dictation.py`
 
 **Launcher doesn't respond:**
-- Check the hotkey path points to the correct `.sh` file
+- Click **🎯 Launch Applications** in the Control Center
+- Or check the hotkey path points to the correct `.sh` file
 - Verify scripts are executable: `chmod +x Program_Launcher/start_voice_assistant.sh`
 
 **"Command not understood":**
 - The spoken phrase doesn't match any entry in `VOICE_COMMANDS`
-- Check `Program_Launcher/voice_assistant.py` or use `settings_gui.py`
+- Check `Program_Launcher/voice_assistant.py` or use the Settings Manager
 - Add alternative phrasings if needed
 
 **Binary not found error:**
@@ -352,9 +392,9 @@ If you encounter anything similar, please open an issue with:
 - Install pystray: `pip install pystray Pillow`
 - Some desktop environments may require additional configuration
 
-**Voice feedback not working:**
-- Install espeak: `sudo apt install espeak`
-- Or spd-say: `sudo apt install speech-dispatcher`
+**White/blank GUI:**
+- Install customtkinter: `pip install customtkinter`
+- For the AppImage, ensure it was built with dependencies bundled
 
 ## AI Development Disclosure
 

@@ -2,6 +2,22 @@
 
 All notable changes to SpeakEasy will be documented in this file.
 
+## [1.2.2] - 2026-08-13
+
+### Added
+- **SpeakEasy Control Center GUI** (`control_gui.py`) - Dark indigo command center launched on startup with one-click Start/Stop controls
+- **Launch Applications Button** - One-click access to the program launcher from the Control Center
+- **Interactive System Tray Menu** - Right-click menu with: Control Center, Toggle Dictation, Settings Manager, and Quit
+
+### Changed
+- **AppImage Startup** - Now launches Control Center GUI by default (no hotkey setup required)
+- **Button Label** - Changed "Launch Mode" → "Launch Applications" for clarity
+- **Removed Robot Voice Completely** - All espeak/spd-say audio calls removed; clean silent visual feedback only
+
+### Fixed
+- **Program_Launcher folder** - Now properly copied into AppImage (fixes "No such file or directory" error)
+- **Launcher button** - Correctly opens voice_assistant.py from the Control Center
+
 ## [1.2.1] - 2026-08-13
 
 ### Added
@@ -22,7 +38,6 @@ All notable changes to SpeakEasy will be documented in this file.
 
 ### Fixed
 - No longer speaks "Dictation on" / "Dictation off" in robotic voice by default
-- Users can still enable voice feedback in settings if desired
 
 ## [1.2.0] - 2026-08-13
 
