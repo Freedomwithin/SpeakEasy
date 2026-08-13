@@ -95,7 +95,7 @@ chmod +x SpeakEasy-x86_64.AppImage
 
 You can also download the latest release from the [GitHub Releases page](https://github.com/Freedomwithin/SpeakEasy/releases/latest).
 
-### Control Center GUI
+### Control Center GUI(New)
 
 When you launch the AppImage, you'll see the **SpeakEasy Control Center**:
 
