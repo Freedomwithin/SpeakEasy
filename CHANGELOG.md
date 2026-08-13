@@ -2,6 +2,28 @@
 
 All notable changes to SpeakEasy will be documented in this file.
 
+## [1.2.1] - 2026-08-13
+
+### Added
+- **Expanded Default Commands** - Dozens of new commands out of the box:
+  - Browsers: Brave, Firefox, Chrome, Chromium
+  - Terminals: Kitty, Terminal (gnome-terminal), Alacritty
+  - Text Editors: Sublime, Gedit, Vim, Neovim, VS Code
+  - File Managers: Nemo, Nautilus, Thunar
+  - Creative: GIMP, Inkscape, Spotify, VLC
+  - Utilities: Calculator, Calendar, System Monitor, Disk Utility, Screenshot
+  - Web Apps: Google, GitHub, Gmail, Drive, YouTube, Reddit, Google Docs
+- **Better Config Defaults** - New users get a rich set of commands immediately
+
+### Changed
+- **Voice Feedback Disabled by Default** - No more robotic espeak voice on start/stop
+- **Cleaner Notifications** - Relies on notify-send and tray icon for status
+- **Config Manager** - Merges user config with defaults safely
+
+### Fixed
+- No longer speaks "Dictation on" / "Dictation off" in robotic voice by default
+- Users can still enable voice feedback in settings if desired
+
 ## [1.2.0] - 2026-08-13
 
 ### Added

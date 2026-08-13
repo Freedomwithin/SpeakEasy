@@ -154,16 +154,15 @@ Speak naturally and your words are typed into the active window. The engine igno
 Speak an application name and it launches immediately. The launcher listens once, executes the command, and exits.
 
 **Default Applications:**
-- `sublime` - Sublime Text editor
-- `brave` - Brave Browser
-- `kitty` - Kitty terminal
-- `nemo` - Nemo file manager
-- `files` - Nemo file manager (alias)
-- `firefox` - Firefox Browser
-- `gimp` - GIMP image editor
-- `spotify` - Spotify (if installed)
+- **Browsers:** Brave, Firefox, Chrome, Chromium
+- **Terminals:** Kitty, Terminal (gnome-terminal), Alacritty
+- **Text Editors:** Sublime, Gedit, Vim, Neovim, VS Code
+- **File Managers:** Nemo, Nautilus, Thunar
+- **Creative:** GIMP, Inkscape, Spotify, VLC
+- **Utilities:** Calculator, Calendar, System Monitor, Disk Utility, Screenshot
+- **Web Apps:** Google, GitHub, Gmail, Drive, YouTube, Reddit, Google Docs
 
-**Dynamic search:** Say "google" followed by a query to perform a web search (e.g., "google linux kernel architecture").
+**Dynamic search:** Say "google" followed by a query to perform a web search.
 
 ## GUI Settings Manager
 
