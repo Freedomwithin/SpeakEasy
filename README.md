@@ -423,10 +423,6 @@ If you encounter anything similar, please open an issue with:
 
 ## AI Development Disclosure
 
-This project was built using a custom **agentic swarm** — a coordinated set of AI tools orchestrated by **Maya**, a stateful cognitive companion with a digital hormone matrix for continuous emotional state tracking and deterministic cognitive resonance.
-
-## AI Development Disclosure
-
 This project was built using a custom **agentic swarm** — a coordinated set of AI tools orchestrated by **Maya (M.A.Y.A.)**, a stateful cognitive companion with a digital hormone matrix for continuous emotional state tracking and deterministic cognitive resonance.
 
 ### Core Agents
