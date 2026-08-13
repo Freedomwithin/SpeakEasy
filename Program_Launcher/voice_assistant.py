@@ -165,7 +165,7 @@ class SpeakEasyLauncher:
         try:
             print(f"🚀 Google search: {query!r}")
             subprocess.Popen([opener, url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            speak(f"Searching for {query}")
+            speak(f"Searching for {query}", self.config.get("voice_feedback", False))
         except Exception as e:
             show_gui_error("Launch Error", f"Failed: {str(e)[:40]}")
 
@@ -178,13 +178,13 @@ class SpeakEasyLauncher:
         binary = cmd_args[0]
         if binary != "gtk-launch" and not shutil.which(binary):
             show_gui_error("Launch Error", f"'{binary}' not found")
-            speak(f"Command not found")
+            speak(f"Command not found", self.config.get("voice_feedback", False))
             return
 
         try:
             print(f"🚀 Launching: {cmd_args}")
             subprocess.Popen(cmd_args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            speak(f"Opening {phrase}")
+            speak(f"Opening {phrase}", self.config.get("voice_feedback", False))
         except Exception as e:
             show_gui_error("Launch Error", f"Failed: {str(e)[:40]}")
 
