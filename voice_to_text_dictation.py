@@ -16,7 +16,7 @@ from vosk import Model, KaldiRecognizer
 from pynput.keyboard import Controller
 
 # Import SpeakEasy modules
-from config_manager import load_config, save_config, speak, show_gui_error
+from config_manager import load_config, save_config, show_gui_error
 from tray_icon import set_tray_state
 
 # ============= CONFIGURATION =============
@@ -139,7 +139,6 @@ class SpeakEasyDictation:
                 callback=self.audio_callback
             ):
                 set_tray_state(True)
-                speak("Dictation started", self.config.get("voice_feedback", False))
                 self.send_notification("SpeakEasy", "🎤 DICTATION ON — Speak now. Press Super+V to stop.", timeout=4000)
 
                 self.model = Model(str(MODEL_PATH))
@@ -163,7 +162,6 @@ class SpeakEasyDictation:
             show_gui_error("Dictation Error", msg)
         finally:
             set_tray_state(False)
-            speak("Dictation stopped", self.config.get("voice_feedback", False))
             self.send_notification("SpeakEasy", "🛑 DICTATION OFF — Microphone closed.", timeout=2000)
 
 if __name__ == "__main__":

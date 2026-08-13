@@ -17,21 +17,23 @@ It provides two complementary tools:
 
 The project started because I was using a Pentium Silver N6000 laptop after my main machine died. I wanted voice input, but the solutions I found either depended on cloud services, wanted a dedicated GPU, or were expensive. SpeakEasy is my attempt to make useful voice control practical on modest Linux hardware.
 
-![SpeakEasy Settings GUI](SpeakEasy_Settings.png)
+![SpeakEasy Control Center](assets/SpeakEasy_Control_Center.png)
+
+![SpeakEasy Settings GUI](assets/SpeakEasy_Settings.png)
 
 ## What Makes SpeakEasy Unique
 
-| Feature | SpeakEasy | Most Alternatives |
-|---------|-----------|-------------------|
-| **Offline-first** | ✅ 100% local | Mixed — many require cloud |
-| **VOSK lightweight** | ✅ Optimized for low-spec | Often use heavier Whisper models |
-| **Dual-purpose** | ✅ Dictation + Launcher | Usually one or the other |
-| **Control Center GUI** | ✅ One-click controls | Terminal-only or hotkey-only |
-| **System Tray** | ✅ Visual status indicator | Most lack this |
-| **GUI Settings** | ✅ No-code customization | Requires editing config files |
-| **Category Organization** | ✅ Apps, Browsers, Dev Tools, etc. | Flat, unorganized lists |
-| **Pentium Silver N6000** | ✅ Tested and working | Most assume modern hardware |
-| **Linux-first** | ✅ Native Linux | Often Windows/Mac first |
+| Feature | SpeakEasy | Typical Alternatives |
+|---------|-----------|----------------------|
+| **Offline speech recognition** | ✅ Runs locally | Many rely on cloud services |
+| **Lightweight** | ✅ Vosk small model | Some use heavier models |
+| **Dual-purpose** | ✅ Dictation + Launcher | Often focused on one use case |
+| **Control Center GUI** | ✅ One-click controls | Varies |
+| **System Tray** | ✅ Visual status indicator | Varies |
+| **GUI Settings** | ✅ No-code customization | Often requires editing config files |
+| **Category Organization** | ✅ Apps, Browsers, Dev Tools, etc. | Varies |
+| **Low-spec hardware** | ✅ Tested on Pentium Silver N6000 | Hardware requirements vary |
+| **Linux-first** | ✅ Native Linux | Varies |
 
 ## Comparison to Other Tools
 
@@ -39,17 +41,17 @@ SpeakEasy was built because existing solutions were either too heavy, too simple
 
 | Tool | Focus | SpeakEasy Advantage |
 |------|-------|---------------------|
-| **Nerd Dictation** | VOSK-based dictation | More polished, easier setup, includes launcher, tray, GUI with categories |
-| **Talon Voice** | Full hands-free computing | Free, lighter, no subscription |
-| **Whisper-based tools** | High-accuracy transcription | Runs on Pentium Silver, no GPU needed |
-| **Cloud STT** | Web-based transcription | 100% offline, privacy-first |
-| **Speech Note** | Note-taking + translation | Simpler, dual-purpose (dictation + launcher) |
+| **Nerd Dictation** | VOSK-based dictation | More integrated GUI, launcher, tray, and command management |
+| **Talon Voice** | Full hands-free computing | Free, lightweight, no subscription |
+| **Whisper-based tools** | High-accuracy transcription | Runs on Pentium Silver hardware without a dedicated GPU |
+| **Cloud STT** | Web-based transcription | Local speech recognition with no cloud service required |
+| **Speech Note** | Note-taking + translation | Focused on lightweight dictation plus voice application launching |
 
-SpeakEasy hits the sweet spot: lightweight, dual-purpose, GUI-driven, and actually tested on low-end hardware.
+SpeakEasy aims for a practical balance of lightweight speech recognition, integrated voice commands, GUI controls, and support for modest Linux hardware.
 
 ## Features
 
-- ✅ **100% Offline** - Speech recognition runs locally; no cloud service is required
+- ✅ **Offline Speech Recognition** - Speech recognition runs locally; no cloud service is required
 - ✅ **Control Center GUI** - Dark indigo visual window to start/stop dictation with one click
 - ✅ **Launch Applications Button** - One-click access to the program launcher from the Control Center
 - ✅ **System Tray Icon & Menu** - Visual status indicator with right-click menu controls
@@ -89,7 +91,7 @@ Download the latest release:
 wget https://github.com/Freedomwithin/SpeakEasy/releases/latest/download/SpeakEasy-x86_64.AppImage
 chmod +x SpeakEasy-x86_64.AppImage
 ./SpeakEasy-x86_64.AppImage
-```
+````
 
 You can also download the latest release from the [GitHub Releases page](https://github.com/Freedomwithin/SpeakEasy/releases/latest).
 
@@ -97,23 +99,24 @@ You can also download the latest release from the [GitHub Releases page](https:/
 
 When you launch the AppImage, you'll see the **SpeakEasy Control Center**:
 
-| Button | Action |
-|--------|--------|
-| **▶ Start Dictation** | Begin voice-to-text typing |
-| **⏹ Stop Dictation** | Stop listening |
-| **🎯 Launch Applications** | Open the program launcher |
-| **⚙️ Settings Manager** | Customize commands |
-| **✕ Quit App** | Exit SpeakEasy |
+| Button                     | Action                     |
+| -------------------------- | -------------------------- |
+| **▶ Start Dictation**      | Begin voice-to-text typing |
+| **⏹ Stop Dictation**       | Stop listening             |
+| **🎯 Launch Applications** | Open the program launcher  |
+| **⚙️ Settings Manager**    | Customize commands         |
+| **✕ Quit App**             | Exit SpeakEasy             |
 
 **No hotkey setup required to get started!** Everything works with buttons.
 
 ### System Tray Menu
 
 Right-click the tray icon for quick access:
-- **Control Center** - Open the GUI
-- **Toggle Dictation** - Start/stop dictation
-- **Settings Manager** - Customize commands
-- **Quit SpeakEasy** - Exit
+
+* **Control Center** - Open the GUI
+* **Toggle Dictation** - Start/stop dictation
+* **Settings Manager** - Customize commands
+* **Quit SpeakEasy** - Exit SpeakEasy
 
 ### Important: Dictation is Toggle-Based
 
@@ -122,8 +125,8 @@ SpeakEasy does **not** currently have a wake word or automatic voice activity de
 For dictation:
 
 1. Click **Start Dictation** in the Control Center (or press Super+V if set up)
-2. Speak.
-3. Click **Stop Dictation** (or press Super+V again).
+2. Speak
+3. Click **Stop Dictation** (or press Super+V again)
 
 **Stop dictation when you are finished speaking.** While dictation is active, the microphone remains open and speech from the environment can be recognized and typed. This includes background conversations, TV audio, keyboard noise, or short words such as "huh."
 
@@ -162,15 +165,17 @@ Speak naturally and your words are typed into the active window. The engine igno
 **Important:** Dictation is active continuously between the start and stop buttons. There is currently no wake word or noise gate. Always click **Stop Dictation** when you are finished.
 
 **Features:**
-- Spoken punctuation: "period", "comma", "question mark", "exclamation point", "new line", "new paragraph", "open paren", "close paren", "semicolon", "colon", "hyphen", "dash"
-- Automatic capitalization of sentences and "I"
-- Toggleable fix for Vosk mishearing "comma" as "come on"
-- System tray shows green when active
+
+* Spoken punctuation: "period", "comma", "question mark", "exclamation point", "new line", "new paragraph", "open paren", "close paren", "semicolon", "colon", "hyphen", "dash"
+* Automatic capitalization of sentences and "I"
+* Toggleable fix for Vosk mishearing "comma" as "come on"
+* System tray shows green when active
 
 **Usage:**
-- Click **Start Dictation** in the Control Center
-- Speak clearly into your microphone
-- Click **Stop Dictation** when finished
+
+* Click **Start Dictation** in the Control Center
+* Speak clearly into your microphone
+* Click **Stop Dictation** when finished
 
 ### 2. Program Launcher
 
@@ -179,13 +184,14 @@ Speak naturally and your words are typed into the active window. The engine igno
 Speak an application name and it launches immediately. The launcher listens once, executes the command, and exits.
 
 **Default Applications:**
-- **Browsers:** Brave, Firefox, Chrome, Chromium
-- **Terminals:** Kitty, Terminal (gnome-terminal), Alacritty
-- **Text Editors:** Sublime, Gedit, Vim, Neovim, VS Code
-- **File Managers:** Nemo, Nautilus, Thunar
-- **Creative:** GIMP, Inkscape, Spotify, VLC
-- **Utilities:** Calculator, Calendar, System Monitor, Disk Utility, Screenshot
-- **Web Apps:** Google, GitHub, Gmail, Drive, YouTube, Reddit, Google Docs
+
+* **Browsers:** Brave, Firefox, Chrome, Chromium
+* **Terminals:** Kitty, Terminal (gnome-terminal), Alacritty
+* **Text Editors:** Sublime, Gedit, Vim, Neovim, VS Code
+* **File Managers:** Nemo, Nautilus, Thunar
+* **Creative:** GIMP, Inkscape, Spotify, VLC
+* **Utilities:** Calculator, Calendar, System Monitor, Disk Utility, Screenshot
+* **Web Apps:** Google, GitHub, Gmail, Drive, YouTube, Reddit, Google Docs
 
 **Dynamic search:** Say "google" followed by a query to perform a web search.
 
@@ -194,19 +200,20 @@ Speak an application name and it launches immediately. The launcher listens once
 **Access:** Click **⚙️ Settings Manager** in the Control Center
 
 **Features:**
-- **Category Tabs**: Apps, Browsers, Terminals, Files, Media, Dev Tools, Utilities, Web, Custom
-- **View all commands**: Clean list with phrase, command, and category
-- **Add new commands**: Enter phrase, command path, select category
-- **Edit existing commands**: Modify any field
-- **Delete commands**: Remove unwanted entries
-- **Settings toggles**: Comma Fix, Tray Icon
-- **One-click save**: Changes saved to `~/.config/speakeasy/config.json`
+
+* **Category Tabs**: Apps, Browsers, Terminals, Files, Media, Dev Tools, Utilities, Web, Custom
+* **View all commands**: Clean list with phrase, command, and category
+* **Add new commands**: Enter phrase, command path, select category
+* **Edit existing commands**: Modify any field
+* **Delete commands**: Remove unwanted entries
+* **Settings toggles**: Comma Fix, Tray Icon
+* **One-click save**: Changes saved to `~/.config/speakeasy/config.json`
 
 ![SpeakEasy Settings GUI](SpeakEasy_Settings.png)
 
 ## Hotkey Configuration (Optional)
 
-If you want keyboard shortcuts, set them up in your desktop environment:
+If you want keyboard shortcuts, set them up in your desktop environment.
 
 ### Cinnamon
 
@@ -215,14 +222,16 @@ If you want keyboard shortcuts, set them up in your desktop environment:
 3. Configure:
 
 **Dictation (Super+V):**
-- Name: "SpeakEasy Dictation"
-- Command: `/path/to/SpeakEasy/voice_to_text_dictation.sh`
-- Key: Super + V
+
+* Name: "SpeakEasy Dictation"
+* Command: `/path/to/SpeakEasy/voice_to_text_dictation.sh`
+* Key: Super + V
 
 **Program Launcher (Super+A):**
-- Name: "SpeakEasy Launcher"
-- Command: `/path/to/SpeakEasy/Program_Launcher/start_voice_assistant.sh`
-- Key: Super + A
+
+* Name: "SpeakEasy Launcher"
+* Command: `/path/to/SpeakEasy/Program_Launcher/start_voice_assistant.sh`
+* Key: Super + A
 
 ### GNOME
 
@@ -264,24 +273,28 @@ Edit `Program_Launcher/voice_assistant.py` and find the `VOICE_COMMANDS` diction
 **Examples:**
 
 Open a folder in Nemo:
+
 ```python
 "projects": ["nemo", "/home/username/projects"],
 "open projects": ["nemo", "/home/username/projects"],
 ```
 
 Open a config file in Sublime:
+
 ```python
 "config": ["subl", "/home/username/.config/app/config.conf"],
 "open config": ["subl", "/home/username/.config/app/config.conf"],
 ```
 
 Open a website:
+
 ```python
 "docs": ["xdg-open", "https://docs.example.com"],
 "open docs": ["xdg-open", "https://docs.example.com"],
 ```
 
-Launch a .desktop file:
+Launch a `.desktop` file:
+
 ```python
 "myapp": ["gtk-launch", "myapp.desktop"],
 "open myapp": ["gtk-launch", "myapp.desktop"],
@@ -290,14 +303,16 @@ Launch a .desktop file:
 ### Command Structure
 
 Each command entry has:
-- **Key**: The phrase you speak (e.g., `"open firefox"`)
-- **Value**: A list where:
-  - First element is the binary or command
-  - Additional elements are arguments
+
+* **Key**: The phrase you speak (e.g., `"open firefox"`)
+* **Value**: A list where:
+
+  * First element is the binary or command
+  * Additional elements are arguments
 
 ## Project Structure
 
-```
+```text
 SpeakEasy/
 ├── Program_Launcher/                # Application launcher
 │   ├── voice_assistant.py           # Launcher engine
@@ -323,25 +338,28 @@ SpeakEasy/
 ### Architecture
 
 The dictation engine uses a "Clean Phrase Dump" approach:
-- Only finalized phrases are typed (partial recognition is ignored)
-- Punctuation and capitalization are applied post-recognition
-- No backspacing or correction loops
+
+* Only finalized phrases are typed (partial recognition is ignored)
+* Punctuation and capitalization are applied post-recognition
+* No backspacing or correction loops
 
 The program launcher uses a "Fast Start" pattern:
-- The microphone opens immediately (before the model loads)
-- Audio is buffered while the model initializes
-- No speech is lost during startup
-- Partial matches can trigger immediate execution
+
+* The microphone opens immediately (before the model loads)
+* Audio is buffered while the model initializes
+* No speech is lost during startup
+* Partial matches can trigger immediate execution
 
 ### Configuration
 
 Settings are stored in `~/.config/speakeasy/config.json`:
-- `voice_commands`: Dictionary of command phrases to actions
-- `aggressive_comma_fix`: Convert "come on" to ","
-- `voice_feedback`: Enable/disable audio feedback (deprecated - now always false)
-- `tray_enabled`: Enable/disable system tray
-- `active_model`: Which Vosk model to use
-- `capitalize_words`: Custom capitalization rules
+
+* `voice_commands`: Dictionary of command phrases to actions
+* `aggressive_comma_fix`: Convert "come on" to ","
+* `voice_feedback`: Legacy configuration option; audio feedback is no longer used
+* `tray_enabled`: Enable/disable system tray
+* `active_model`: Which Vosk model to use
+* `capitalize_words`: Custom capitalization rules
 
 ## Changelog
 
@@ -349,52 +367,59 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## Known Limitations
 
-- The Vosk small model uses phonetic recognition with no grammar layer
-- "Comma" is frequently misheard as "come on" (toggleable fix included)
-- **No wake word yet** - dictation is started/stopped with buttons or Super+V
-- **No noise gate yet** - background speech, TV audio, keyboard noise, and other sounds may be transcribed while dictation is active
-- The microphone remains open while dictation is active; stop it when you are finished
-- Tested primarily on Linux Mint 22.3 Cinnamon/X11; other desktop environments may work but have not all been tested
+* The Vosk small model uses phonetic recognition with no grammar layer
+* "Comma" is frequently misheard as "come on" (toggleable fix included)
+* **No wake word yet** - dictation is started/stopped with buttons or Super+V
+* **No noise gate yet** - background speech, TV audio, keyboard noise, and other sounds may be transcribed while dictation is active
+* The microphone remains open while dictation is active; stop it when you are finished
+* Tested primarily on Linux Mint 22.3 Cinnamon/X11; other desktop environments may work but have not all been tested
 
 ### Reported AppImage Issue
 
 A user reported that running the AppImage unexpectedly cleared their clipboard and that the AppImage file subsequently disappeared. I have **not reproduced this behavior yet**, so it is not currently known whether it is caused by SpeakEasy, the user's environment, or another system issue.
 
 If you encounter anything similar, please open an issue with:
-- Linux distribution and version
-- Desktop environment and display server (X11/Wayland)
-- SpeakEasy version
-- How the AppImage was launched
-- Any terminal output or relevant system logs
+
+* Linux distribution and version
+* Desktop environment and display server (X11/Wayland)
+* SpeakEasy version
+* How the AppImage was launched
+* Any terminal output or relevant system logs
 
 ## Troubleshooting
 
 **Dictation doesn't start:**
-- Verify the microphone is working: `arecord -l`
-- Check the model exists: `ls vosk-model-small-en-us-0.15/`
-- Run the script directly: `python3 voice_to_text_dictation.py`
+
+* Verify the microphone is working: `arecord -l`
+* Check the model exists: `ls vosk-model-small-en-us-0.15/`
+* Run the script directly: `python3 voice_to_text_dictation.py`
 
 **Launcher doesn't respond:**
-- Click **🎯 Launch Applications** in the Control Center
-- Or check the hotkey path points to the correct `.sh` file
-- Verify scripts are executable: `chmod +x Program_Launcher/start_voice_assistant.sh`
+
+* Click **🎯 Launch Applications** in the Control Center
+* Or check the hotkey path points to the correct `.sh` file
+* Verify scripts are executable: `chmod +x Program_Launcher/start_voice_assistant.sh`
 
 **"Command not understood":**
-- The spoken phrase doesn't match any entry in `VOICE_COMMANDS`
-- Check `Program_Launcher/voice_assistant.py` or use the Settings Manager
-- Add alternative phrasings if needed
+
+* The spoken phrase doesn't match any entry in `VOICE_COMMANDS`
+* Check `Program_Launcher/voice_assistant.py` or use the Settings Manager
+* Add alternative phrasings if needed
 
 **Binary not found error:**
-- Verify the application is installed: `which application-name`
-- For `.desktop` files, ensure they exist in `~/.local/share/applications/`
+
+* Verify the application is installed: `which application-name`
+* For `.desktop` files, ensure they exist in `~/.local/share/applications/`
 
 **Tray icon not showing:**
-- Install pystray: `pip install pystray Pillow`
-- Some desktop environments may require additional configuration
+
+* Install pystray: `pip install pystray Pillow`
+* Some desktop environments may require additional configuration
 
 **White/blank GUI:**
-- Install customtkinter: `pip install customtkinter`
-- For the AppImage, ensure it was built with dependencies bundled
+
+* Install customtkinter: `pip install customtkinter`
+* For the AppImage, ensure it was built with dependencies bundled
 
 ## AI Development Disclosure
 
@@ -403,10 +428,11 @@ AI tools were used as a development aid while building and documenting SpeakEasy
 ## Feedback and Testing
 
 SpeakEasy was built primarily for older and low-spec Linux hardware. Feedback is especially useful from people running it on:
-- Older Intel or AMD CPUs
-- 4GB RAM systems
-- Integrated graphics
-- Linux Mint and other lightweight Linux configurations
+
+* Older Intel or AMD CPUs
+* 4GB RAM systems
+* Integrated graphics
+* Linux Mint and other lightweight Linux configurations
 
 If you find a bug, please include your hardware, Linux distribution/version, desktop environment, and whether you were using the AppImage or source installation.
 
@@ -418,15 +444,23 @@ MIT License - See LICENSE file for details.
 
 The primary development/test machine is a budget laptop running Linux Mint 22.3 Zena:
 
-- **CPU:** Intel Pentium Silver N6000 (4 cores, up to 1.1GHz)
-- **Graphics:** Integrated Intel UHD Graphics
-- **RAM:** 4GB+ (the Vosk model itself uses roughly 40MB)
-- **Audio:** PipeWire 1.0.5 or PulseAudio
-- **GPU:** No dedicated GPU required
-- **Packaging:** Standalone x86_64 AppImage available
+* **CPU:** Intel Pentium Silver N6000 (4 cores, up to 1.1GHz)
+* **Graphics:** Integrated Intel UHD Graphics
+* **RAM:** 4GB+ (the Vosk model itself uses roughly 40MB)
+* **Audio:** PipeWire 1.0.5 or PulseAudio
+* **GPU:** No dedicated GPU required
+* **Packaging:** Standalone x86_64 AppImage available
 
 SpeakEasy is intended to remain useful on low-power systems:
-- **CPU:** Intel Pentium Silver N6000 (4 cores, 800MHz-1.1GHz)
-- **RAM:** 4GB+ (model loads ~40MB into memory)
-- **Audio:** PipeWire 1.0.5 or PulseAudio
-- Tested on Linux Mint 22.3 Zena / Cinnamon
+
+* **CPU:** Intel Pentium Silver N6000 (4 cores, 800MHz-1.1GHz)
+* **RAM:** 4GB+ (model loads ~40MB into memory)
+* **Audio:** PipeWire 1.0.5 or PulseAudio
+* Tested on Linux Mint 22.3 Zena / Cinnamon
+
+```
+
+**One note before you push:** I added the `SpeakEasy_Control_Center.png` reference because I think that screenshot would be valuable. **If that file doesn't exist in the repo yet, remove that one image line rather than pushing a broken image.** Everything else I'd consider ready.
+
+And then, seriously: **push it.** Don't spend another two hours making the README 1% better. 😄
+```

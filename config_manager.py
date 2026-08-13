@@ -1,3 +1,11 @@
+import json
+import os
+import subprocess
+from pathlib import Path
+
+CONFIG_DIR = Path.home() / ".config" / "speakeasy"
+CONFIG_FILE = CONFIG_DIR / "config.json"
+
 DEFAULT_CONFIG = {
     "sample_rate": 16000,
     "block_size": 4000,
@@ -14,9 +22,7 @@ DEFAULT_CONFIG = {
         "jonathon": "Jonathon"
     },
     "voice_commands": {
-        # ============================================
         # BROWSERS
-        # ============================================
         "brave": ["brave-browser"],
         "open brave": ["brave-browser"],
         "firefox": ["firefox"],
@@ -26,9 +32,7 @@ DEFAULT_CONFIG = {
         "chromium": ["chromium-browser"],
         "open chromium": ["chromium-browser"],
         
-        # ============================================
         # TERMINALS
-        # ============================================
         "kitty": ["kitty"],
         "open kitty": ["kitty"],
         "terminal": ["gnome-terminal"],
@@ -36,9 +40,7 @@ DEFAULT_CONFIG = {
         "alacritty": ["alacritty"],
         "open alacritty": ["alacritty"],
         
-        # ============================================
         # TEXT EDITORS
-        # ============================================
         "sublime": ["subl"],
         "open sublime": ["subl"],
         "text editor": ["gedit"],
@@ -52,9 +54,7 @@ DEFAULT_CONFIG = {
         "vscode": ["code"],
         "open vscode": ["code"],
         
-        # ============================================
         # FILE MANAGERS
-        # ============================================
         "nemo": ["nemo"],
         "open nemo": ["nemo"],
         "files": ["nemo"],
@@ -63,9 +63,7 @@ DEFAULT_CONFIG = {
         "thunar": ["thunar"],
         "open thunar": ["thunar"],
         
-        # ============================================
         # CREATIVE / MEDIA
-        # ============================================
         "gimp": ["gimp"],
         "open gimp": ["gimp"],
         "inkscape": ["inkscape"],
@@ -75,9 +73,7 @@ DEFAULT_CONFIG = {
         "vlc": ["vlc"],
         "open vlc": ["vlc"],
         
-        # ============================================
         # UTILITIES
-        # ============================================
         "calculator": ["gnome-calculator"],
         "open calculator": ["gnome-calculator"],
         "calendar": ["gnome-calendar"],
@@ -89,9 +85,7 @@ DEFAULT_CONFIG = {
         "screenshot": ["gnome-screenshot"],
         "open screenshot": ["gnome-screenshot"],
         
-        # ============================================
-        # WEB APPS (via xdg-open)
-        # ============================================
+        # WEB APPS
         "google": ["xdg-open", "https://www.google.com"],
         "open google": ["xdg-open", "https://www.google.com"],
         "github": ["xdg-open", "https://github.com"],
@@ -108,3 +102,36 @@ DEFAULT_CONFIG = {
         "open docs": ["xdg-open", "https://docs.google.com"],
     }
 }
+
+def load_config():
+    if not CONFIG_FILE.exists():
+        save_config(DEFAULT_CONFIG)
+        return DEFAULT_CONFIG
+    try:
+        with open(CONFIG_FILE, "r") as f:
+            user_config = json.load(f)
+            config = DEFAULT_CONFIG.copy()
+            config.update(user_config)
+            return config
+    except Exception as e:
+        print(f"⚠️ Error loading config: {e}")
+        return DEFAULT_CONFIG
+
+def save_config(config):
+    try:
+        CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+        with open(CONFIG_FILE, "w") as f:
+            json.dump(config, f, indent=2)
+    except Exception as e:
+        print(f"❌ Error saving config: {e}")
+
+def show_gui_error(title, message):
+    try:
+        if subprocess.call(["which", "zenity"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
+            subprocess.Popen(["zenity", "--error", "--title", title, "--text", message],
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        else:
+            subprocess.Popen(["notify-send", f"❌ {title}", message, "-t", "4000"],
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        print(f"❌ [{title}] {message}")

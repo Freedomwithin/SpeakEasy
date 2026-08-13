@@ -23,6 +23,8 @@ cd SpeakEasy
 
 ## Control Center GUI
 
+![SpeakEasy Control Center](assets/SpeakEasy_Control_Center.png)
+
 When you launch SpeakEasy, you'll see a dark indigo window with:
 
 | Button | Action |
@@ -96,6 +98,8 @@ Click **🎯 Launch Applications** in the Control Center, or press Super+A (if s
 - Say "google [query]" to search the web
 
 ## Settings Manager
+
+![SpeakEasy Settings GUI](assets/SpeakEasy_Settings.png)
 
 Click **⚙️ Settings Manager** in the Control Center.
 
