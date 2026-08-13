@@ -1,5 +1,9 @@
 # SpeakEasy
 
+[![Latest Release](https://img.shields.io/github/v/release/Freedomwithin/SpeakEasy)](https://github.com/Freedomwithin/SpeakEasy/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![AppImage](https://img.shields.io/badge/AppImage-Download-green.svg)](https://github.com/Freedomwithin/SpeakEasy/releases/latest)
+
 Offline voice tools for low-spec Linux systems. Built for Intel Pentium Silver N6000 and similar CPUs.
 
 ## Overview
