@@ -28,56 +28,115 @@ BLOCK_SIZE = 4000
 QUEUE_TIMEOUT = 0.2
 
 # Flexible Command Mapping
+# Edit this dictionary to add your own applications
 VOICE_COMMANDS = {
-    # Base Utilities
+    # ============================================
+    # COMMON APPLICATIONS (works on most systems)
+    # ============================================
+    
+    # Text Editors
     "sublime": ["subl"],
     "open sublime": ["subl"],
-    "brave": ["brave-browser-beta"],
-    "open brave": ["brave-browser-beta"],
+    "vim": ["vim"],
+    "open vim": ["vim"],
+    "nvim": ["nvim"],
+    "open nvim": ["nvim"],
+    
+    # Browsers
+    "brave": ["brave-browser"],
+    "open brave": ["brave-browser"],
+    "firefox": ["firefox"],
+    "open firefox": ["firefox"],
+    "chrome": ["google-chrome"],
+    "open chrome": ["google-chrome"],
+    "chromium": ["chromium-browser"],
+    "open chromium": ["chromium-browser"],
+    
+    # Terminals
     "kitty": ["kitty"],
     "open kitty": ["kitty"],
+    "terminal": ["gnome-terminal"],
+    "open terminal": ["gnome-terminal"],
+    "alacritty": ["alacritty"],
+    "open alacritty": ["alacritty"],
+    
+    # File Managers
     "nemo": ["nemo"],
     "open nemo": ["nemo"],
     "files": ["nemo"],
-
-    # Custom Security & AI Tools
-    "proxy": ["gtk-launch", "Brave_Proxy.desktop"],
-    "open proxy": ["gtk-launch", "Brave_Proxy.desktop"],
-    "burp": ["gtk-launch", "Burp_Pro_2026.desktop"],
-    "open burp": ["gtk-launch", "Burp_Pro_2026.desktop"],
-    "claude": ["gtk-launch", "claude.desktop"],
-    "open claude": ["gtk-launch", "claude.desktop"],
-    "deep seek": ["gtk-launch", "deepseek.desktop"],
-    "open deep seek": ["gtk-launch", "deepseek.desktop"],
-    "gemini": ["gtk-launch", "gemini.desktop"],
-    "open gemini": ["gtk-launch", "gemini.desktop"],
-
-    # Sovereign & Maya Ecosystem
-    "anti gravity": ["gtk-launch", "Anti_Gravity.desktop"],
-    "open anti gravity": ["gtk-launch", "Anti_Gravity.desktop"],
-    "glyph": ["gtk-launch", "Glyph.desktop"],
-    "open glyph": ["gtk-launch", "Glyph.desktop"],
-    "swarm hub": ["gtk-launch", "sovereign-swarm-hub-v5.desktop"],
-    "open swarm hub": ["gtk-launch", "sovereign-swarm-hub-v5.desktop"],
-    "neural dashboard": ["gtk-launch", "sovereign-neural-dashboard.desktop"],
-    "open neural dashboard": ["gtk-launch", "sovereign-neural-dashboard.desktop"],
-    "scratch pad": ["gtk-launch", "sovereign-scratchpad.desktop"],
-    "open scratch pad": ["gtk-launch", "sovereign-scratchpad.desktop"],
-    "vault": ["gtk-launch", "sovereign-vault.desktop"],
-    "open vault": ["gtk-launch", "sovereign-vault.desktop"],
-    "call maya": ["gtk-launch", "call_maya.desktop"],
-
-    # General Launchers
-    "calendar": ["gtk-launch", "Aeon Calendar Working.desktop"],
-    "open calendar": ["gtk-launch", "Aeon Calendar Working.desktop"],
-    "gimp": ["gtk-launch", "gimp.desktop"],
-    "open gimp": ["gtk-launch", "gimp.desktop"],
-    "spotify": ["gtk-launch", "spotify-lite.desktop"],
-    "open spotify": ["gtk-launch", "spotify-lite.desktop"],
-    "youtube downloader": ["gtk-launch", "youtube_downloader.desktop"],
-    "open youtube downloader": ["gtk-launch", "youtube_downloader.desktop"],
+    "nautilus": ["nautilus"],
+    "open nautilus": ["nautilus"],
+    "thunar": ["thunar"],
+    "open thunar": ["thunar"],
+    
+    # ============================================
+    # COMMON APPLICATIONS (check if installed)
+    # ============================================
+    
+    # Creative
+    "gimp": ["gimp"],
+    "open gimp": ["gimp"],
+    "inkscape": ["inkscape"],
+    "open inkscape": ["inkscape"],
+    "blender": ["blender"],
+    "open blender": ["blender"],
+    
+    # Media
+    "spotify": ["spotify"],
+    "open spotify": ["spotify"],
+    "vlc": ["vlc"],
+    "open vlc": ["vlc"],
+    "mpv": ["mpv"],
+    "open mpv": ["mpv"],
+    
+    # Development
+    "vs code": ["code"],
+    "open vs code": ["code"],
+    "vscode": ["code"],
+    "open vscode": ["code"],
+    "pycharm": ["pycharm-community"],
+    "open pycharm": ["pycharm-community"],
+    "intellij": ["idea"],
+    "open intellij": ["idea"],
+    
+    # Utilities
+    "calculator": ["gnome-calculator"],
+    "open calculator": ["gnome-calculator"],
+    "disk": ["gnome-disk-utility"],
+    "open disk": ["gnome-disk-utility"],
+    "system monitor": ["gnome-system-monitor"],
+    "open system monitor": ["gnome-system-monitor"],
+    
+    # ============================================
+    # DESKTOP FILES (gtk-launch examples)
+    # ============================================
+    # Uncomment and modify these to match your system:
+    # "slack": ["gtk-launch", "slack.desktop"],
+    # "open slack": ["gtk-launch", "slack.desktop"],
+    # "discord": ["gtk-launch", "discord.desktop"],
+    # "open discord": ["gtk-launch", "discord.desktop"],
+    # "zoom": ["gtk-launch", "zoom.desktop"],
+    # "open zoom": ["gtk-launch", "zoom.desktop"],
+    
+    # ============================================
+    # CUSTOM EXAMPLES (edit these to match your paths)
+    # ============================================
+    # Example: Open a folder in Nemo
+    # "projects": ["nemo", "/home/username/projects"],
+    # "open projects": ["nemo", "/home/username/projects"],
+    
+    # Example: Open a config file in Sublime
+    # "config": ["subl", "/home/username/.config/app/config.conf"],
+    # "open config": ["subl", "/home/username/.config/app/config.conf"],
+    
+    # Example: Open a website
+    # "docs": ["xdg-open", "https://docs.example.com"],
+    # "open docs": ["xdg-open", "https://docs.example.com"],
 }
-# =========================================
+# ============================================
+# NOTE: "google" is handled dynamically below
+# Say "google <query>" for web searches
+# ============================================
 
 
 class SpeakEasyLauncher:
