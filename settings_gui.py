@@ -26,9 +26,6 @@ except ImportError:
     def save_config(c): pass
     def speak(t, e=True): pass
 
-# ─────────────────────────────────────────────
-# Colour Palette (matches Sovereign Swarm Hub)
-# ─────────────────────────────────────────────
 NIGHT_BG     = "#08080f"
 DEEP_INDIGO  = "#0d0d1c"
 PANEL_BG     = "#10101f"
@@ -46,7 +43,6 @@ LIME         = "#10b981"
 CRIMSON      = "#ef4444"
 AMBER        = "#f59e0b"
 
-# Category definitions
 CATEGORIES = ["All", "Apps", "Browsers", "Terminals", "Files", "Media", "Dev Tools", "Utilities", "Web", "Custom"]
 
 CATEGORY_COLORS = {
@@ -62,7 +58,6 @@ CATEGORY_COLORS = {
     "All":         "#6c6c8c",
 }
 
-# Auto-assign categories by known binary names
 def auto_category(phrase: str, cmd: list) -> str:
     binary = cmd[0] if cmd else ""
     browsers = ["brave-browser", "firefox", "google-chrome", "chromium-browser", "xdg-open"]
@@ -89,17 +84,14 @@ class SpeakEasyGUI(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("SpeakEasy — Command Center")
-        
-        # [ADJUST HERE]: Window base dimensions (width x height) and minimum size constraint
         self.geometry("1120x780")
         self.minsize(900, 640)
-        
         self.configure(fg_color=NIGHT_BG)
         self.resizable(True, True)
 
         self.config_data = load_config()
         self.commands_raw = dict(self.config_data.get("voice_commands", {}))
-        self.category_map = {}   # phrase -> category
+        self.category_map = {}
         self._build_category_map()
         self.filter_category = "All"
         self.search_term = ""
@@ -109,30 +101,24 @@ class SpeakEasyGUI(ctk.CTk):
         self._build_ui()
         self._refresh_list()
 
-        # Keyboard shortcuts
         self.bind("<Control-s>", lambda e: self._save_config())
         self.bind("<Control-q>", lambda e: self.destroy())
         self.bind("<Control-z>", lambda e: self._undo())
         self.bind("<Control-n>", lambda e: self._focus_new_entry())
         self.bind("<Escape>", lambda e: self._clear_selection())
 
-    # ── Category Map ──────────────────────────────
     def _build_category_map(self):
         for phrase, cmd in self.commands_raw.items():
             if phrase not in self.category_map:
                 self.category_map[phrase] = auto_category(phrase, cmd)
 
-    # ── UI Construction ────────────────────────────
     def _build_ui(self):
-        # ── Header ────────────────────────────────
-        # [ADJUST HERE]: Change header height (e.g., height=80)
         header = ctk.CTkFrame(self, fg_color=DEEP_INDIGO, corner_radius=0, height=80)
         header.pack(fill="x")
         header.pack_propagate(False)
 
         title_lbl = ctk.CTkLabel(
             header, text="🎙  SpeakEasy  —  Command Center",
-            # [ADJUST HERE]: Main title font size ("Arial", 24, "bold")
             font=ctk.CTkFont("Arial", 24, "bold"),
             text_color=VIVID_INDIGO
         )
@@ -140,34 +126,27 @@ class SpeakEasyGUI(ctk.CTk):
 
         sub_lbl = ctk.CTkLabel(
             header, text="Voice Command Manager  ·  v2.0",
-            # [ADJUST HERE]: Subtitle font size ("Arial", 13)
             font=ctk.CTkFont("Arial", 13),
             text_color=STEEL
         )
         sub_lbl.pack(side="left", padx=0, pady=22)
 
-        # Header right: keyboard shortcut hints
         hint_lbl = ctk.CTkLabel(
             header, text="Ctrl+S  Save    Ctrl+Z  Undo    Ctrl+N  New    Ctrl+Q  Quit",
-            # [ADJUST HERE]: Shortcut hint font size ("Arial", 11)
             font=ctk.CTkFont("Arial", 11),
             text_color=DIM_TEXT
         )
         hint_lbl.pack(side="right", padx=20)
 
-        # ── Body ──────────────────────────────────
         body = ctk.CTkFrame(self, fg_color=NIGHT_BG, corner_radius=0)
         body.pack(fill="both", expand=True, padx=0, pady=0)
 
-        # ── Left Sidebar: Category Filter ─────────
-        # [ADJUST HERE]: Sidebar width (width=190)
         sidebar = ctk.CTkFrame(body, fg_color=DEEP_INDIGO, corner_radius=0, width=190)
         sidebar.pack(side="left", fill="y", padx=0)
         sidebar.pack_propagate(False)
 
         ctk.CTkLabel(
             sidebar, text="CATEGORIES",
-            # [ADJUST HERE]: Section label font size ("Arial", 11, "bold")
             font=ctk.CTkFont("Arial", 11, "bold"),
             text_color=STEEL
         ).pack(anchor="w", padx=16, pady=(18, 8))
@@ -178,7 +157,6 @@ class SpeakEasyGUI(ctk.CTk):
             btn = ctk.CTkButton(
                 sidebar,
                 text=cat,
-                # [ADJUST HERE]: Category item font size and button height (height=38)
                 font=ctk.CTkFont("Arial", 13),
                 fg_color="transparent",
                 hover_color=INPUT_BG,
@@ -191,7 +169,6 @@ class SpeakEasyGUI(ctk.CTk):
             btn.pack(fill="x", padx=10, pady=2)
             self.cat_buttons[cat] = btn
 
-        # Separator + settings toggles
         ctk.CTkFrame(sidebar, fg_color=BORDER, height=1).pack(fill="x", padx=10, pady=16)
 
         ctk.CTkLabel(sidebar, text="SETTINGS", font=ctk.CTkFont("Arial", 11, "bold"), text_color=STEEL).pack(anchor="w", padx=16, pady=(0, 8))
@@ -199,7 +176,6 @@ class SpeakEasyGUI(ctk.CTk):
         self.voice_fb_var = ctk.BooleanVar(value=self.config_data.get("voice_feedback", True))
         ctk.CTkSwitch(
             sidebar, text="Voice Feedback",
-            # [ADJUST HERE]: Settings switch label font size ("Arial", 12)
             font=ctk.CTkFont("Arial", 12),
             variable=self.voice_fb_var,
             text_color=LIGHT_GRAY,
@@ -230,12 +206,9 @@ class SpeakEasyGUI(ctk.CTk):
             fg_color=INPUT_BG,
         ).pack(anchor="w", padx=14, pady=5)
 
-        # ── Main Panel ────────────────────────────
         main = ctk.CTkFrame(body, fg_color=NIGHT_BG, corner_radius=0)
         main.pack(side="left", fill="both", expand=True, padx=0)
 
-        # ── Search Bar ────────────────────────────
-        # [ADJUST HERE]: Search bar row height (height=56)
         search_row = ctk.CTkFrame(main, fg_color=PANEL_BG, corner_radius=0, height=56)
         search_row.pack(fill="x")
         search_row.pack_propagate(False)
@@ -249,7 +222,6 @@ class SpeakEasyGUI(ctk.CTk):
             search_row,
             textvariable=self.search_var,
             placeholder_text="Search commands...",
-            # [ADJUST HERE]: Search input font size and height (height=38)
             font=ctk.CTkFont("Arial", 14),
             fg_color=INPUT_BG,
             border_color=BORDER,
@@ -259,10 +231,8 @@ class SpeakEasyGUI(ctk.CTk):
         )
         search_entry.pack(side="left", fill="x", expand=True, padx=(0, 10), pady=9)
 
-        # Import / Export buttons
         ctk.CTkButton(
             search_row, text="⬆  Export",
-            # [ADJUST HERE]: Export/Import button font size, width (width=100), and height (height=38)
             font=ctk.CTkFont("Arial", 12, "bold"),
             fg_color=INPUT_BG, hover_color=BORDER,
             text_color=INDIGO_GLOW, border_color=BORDER, border_width=1,
@@ -279,13 +249,10 @@ class SpeakEasyGUI(ctk.CTk):
             command=self._import_commands
         ).pack(side="right", padx=(0, 6), pady=9)
 
-        # ── Column Headers ────────────────────────
-        # [ADJUST HERE]: Column header row height (height=40)
         col_header = ctk.CTkFrame(main, fg_color=CARD_BG, corner_radius=0, height=40)
         col_header.pack(fill="x")
         col_header.pack_propagate(False)
 
-        # [ADJUST HERE]: Change column header placements (.place(x=..., y=...)) if modifying widths
         ctk.CTkLabel(col_header, text="VOICE PHRASE", font=ctk.CTkFont("Arial", 11, "bold"),
                      text_color=STEEL).pack(side="left", padx=(18, 0), pady=10)
         ctk.CTkLabel(col_header, text="COMMAND", font=ctk.CTkFont("Arial", 11, "bold"),
@@ -295,7 +262,6 @@ class SpeakEasyGUI(ctk.CTk):
         ctk.CTkLabel(col_header, text="ACTIONS", font=ctk.CTkFont("Arial", 11, "bold"),
                      text_color=STEEL).place(x=760, y=10)
 
-        # ── Scrollable Command List ───────────────
         self.list_frame = ctk.CTkScrollableFrame(
             main, fg_color=PANEL_BG, corner_radius=0,
             scrollbar_button_color=BORDER,
@@ -303,16 +269,12 @@ class SpeakEasyGUI(ctk.CTk):
         )
         self.list_frame.pack(fill="both", expand=True)
 
-        # ── Bottom: Add/Edit Panel ────────────────
-        # [ADJUST HERE]: Bottom editor panel height (height=150)
         editor = ctk.CTkFrame(main, fg_color=DEEP_INDIGO, corner_radius=0, height=150)
         editor.pack(fill="x")
         editor.pack_propagate(False)
 
-        # Editor title
         self.editor_title = ctk.CTkLabel(
             editor, text="✦  ADD NEW COMMAND",
-            # [ADJUST HERE]: Editor title font size ("Arial", 12, "bold")
             font=ctk.CTkFont("Arial", 12, "bold"),
             text_color=VIVID_INDIGO
         )
@@ -321,29 +283,24 @@ class SpeakEasyGUI(ctk.CTk):
         fields_row = ctk.CTkFrame(editor, fg_color="transparent")
         fields_row.pack(fill="x", padx=18, pady=0)
 
-        # Phrase
         ctk.CTkLabel(fields_row, text="Phrase", font=ctk.CTkFont("Arial", 12), text_color=STEEL).grid(row=0, column=0, sticky="w", pady=2)
         self.phrase_entry = ctk.CTkEntry(
             fields_row, placeholder_text="e.g. open brave",
-            # [ADJUST HERE]: Phrase input font size, width (width=220), and height (height=38)
             font=ctk.CTkFont("Arial", 13),
             fg_color=INPUT_BG, border_color=BORDER, text_color=WHITE,
             height=38, corner_radius=8, width=220
         )
         self.phrase_entry.grid(row=1, column=0, padx=(0, 12))
 
-        # Command
         ctk.CTkLabel(fields_row, text="Command", font=ctk.CTkFont("Arial", 12), text_color=STEEL).grid(row=0, column=1, sticky="w", pady=2)
         self.cmd_entry = ctk.CTkEntry(
             fields_row, placeholder_text="e.g. brave-browser",
-            # [ADJUST HERE]: Command input font size, width (width=220), and height (height=38)
             font=ctk.CTkFont("Arial", 13),
             fg_color=INPUT_BG, border_color=BORDER, text_color=WHITE,
             height=38, corner_radius=8, width=220
         )
         self.cmd_entry.grid(row=1, column=1, padx=(0, 12))
 
-        # Category
         ctk.CTkLabel(fields_row, text="Category", font=ctk.CTkFont("Arial", 12), text_color=STEEL).grid(row=0, column=2, sticky="w", pady=2)
         self.cat_var = ctk.StringVar(value="Custom")
         self.cat_menu = ctk.CTkOptionMenu(
@@ -353,19 +310,16 @@ class SpeakEasyGUI(ctk.CTk):
             button_hover_color=SOFT_BLUE,
             dropdown_fg_color=CARD_BG, dropdown_text_color=WHITE,
             dropdown_hover_color=INPUT_BG,
-            # [ADJUST HERE]: Dropdown menu font size, width (width=140), and height (height=38)
             text_color=WHITE, font=ctk.CTkFont("Arial", 13),
             height=38, corner_radius=8, width=140
         )
         self.cat_menu.grid(row=1, column=2, padx=(0, 12))
 
-        # Buttons
         btn_col = ctk.CTkFrame(fields_row, fg_color="transparent")
         btn_col.grid(row=0, column=3, rowspan=2, padx=(12, 0), sticky="s")
 
         self.add_btn = ctk.CTkButton(
             btn_col, text="＋  Add / Update",
-            # [ADJUST HERE]: Add/Update button width (width=150) and height (height=38)
             font=ctk.CTkFont("Arial", 13, "bold"),
             fg_color=VIVID_INDIGO, hover_color=SOFT_BLUE,
             text_color=WHITE, corner_radius=8,
@@ -376,7 +330,6 @@ class SpeakEasyGUI(ctk.CTk):
 
         ctk.CTkButton(
             btn_col, text="✕  Clear",
-            # [ADJUST HERE]: Clear button width (width=100) and height (height=38)
             font=ctk.CTkFont("Arial", 13),
             fg_color=INPUT_BG, hover_color=BORDER,
             text_color=LIGHT_GRAY, border_color=BORDER, border_width=1,
@@ -386,7 +339,6 @@ class SpeakEasyGUI(ctk.CTk):
 
         ctk.CTkButton(
             btn_col, text="💾  Save Config",
-            # [ADJUST HERE]: Save Config button width (width=150) and height (height=38)
             font=ctk.CTkFont("Arial", 13, "bold"),
             fg_color=LIME, hover_color="#059669",
             text_color="#000000", corner_radius=8,
@@ -394,25 +346,20 @@ class SpeakEasyGUI(ctk.CTk):
             command=self._save_config
         ).pack(side="left")
 
-        # ── Status Bar ────────────────────────────
-        # [ADJUST HERE]: Status bar height (height=32)
         self.status_bar = ctk.CTkFrame(self, fg_color=DEEP_INDIGO, corner_radius=0, height=32)
         self.status_bar.pack(fill="x", side="bottom")
         self.status_bar.pack_propagate(False)
         self.status_lbl = ctk.CTkLabel(
             self.status_bar, text="Ready.",
-            # [ADJUST HERE]: Status text font size ("Arial", 11)
             font=ctk.CTkFont("Arial", 11), text_color=STEEL
         )
         self.status_lbl.pack(side="left", padx=16)
         self.count_lbl = ctk.CTkLabel(
             self.status_bar, text="",
-            # [ADJUST HERE]: Counter text font size ("Arial", 11)
             font=ctk.CTkFont("Arial", 11), text_color=STEEL
         )
         self.count_lbl.pack(side="right", padx=16)
 
-    # ── List Rendering ────────────────────────────
     def _refresh_list(self):
         for w in self.list_frame.winfo_children():
             w.destroy()
@@ -432,33 +379,26 @@ class SpeakEasyGUI(ctk.CTk):
             is_selected = phrase == self.selected_phrase
             if is_selected:
                 row_color = "#1c1c3d"
-            
-            # [ADJUST HERE]: Individual command row height (height=48)
+
             row = ctk.CTkFrame(self.list_frame, fg_color=row_color, corner_radius=6, height=48)
             row.pack(fill="x", padx=8, pady=3)
             row.pack_propagate(False)
             row.bind("<Button-1>", lambda e, p=phrase, c=cmd, cs=cmd_str, ca=cat: self._select_row(p, c, cs, ca))
 
-            # Phrase label
-            # [ADJUST HERE]: List item phrase font size and width (width=300)
             ph_lbl = ctk.CTkLabel(row, text=phrase, font=ctk.CTkFont("Arial", 13),
                                    text_color=WHITE if not is_selected else INDIGO_GLOW,
                                    anchor="w", width=300)
             ph_lbl.place(x=14, y=12)
             ph_lbl.bind("<Button-1>", lambda e, p=phrase, c=cmd, cs=cmd_str, ca=cat: self._select_row(p, c, cs, ca))
 
-            # Command label
-            # [ADJUST HERE]: List item command string font size and width (width=230)
             cmd_lbl = ctk.CTkLabel(row, text=cmd_str, font=ctk.CTkFont("Arial", 12),
                                     text_color=LIGHT_GRAY, anchor="w", width=230)
             cmd_lbl.place(x=324, y=13)
             cmd_lbl.bind("<Button-1>", lambda e, p=phrase, c=cmd, cs=cmd_str, ca=cat: self._select_row(p, c, cs, ca))
 
-            # Category badge
             cat_color = CATEGORY_COLORS.get(cat, STEEL)
             cat_badge = ctk.CTkLabel(
                 row, text=f"  {cat}  ",
-                # [ADJUST HERE]: Category badge font size and width (width=100)
                 font=ctk.CTkFont("Arial", 11, "bold"),
                 text_color=cat_color,
                 fg_color=INPUT_BG,
@@ -467,8 +407,6 @@ class SpeakEasyGUI(ctk.CTk):
             )
             cat_badge.place(x=564, y=11)
 
-            # Action buttons
-            # [ADJUST HERE]: Play/Test button dimensions (width=34, height=30) and placement (x=740, y=9)
             test_btn = ctk.CTkButton(
                 row, text="▶", width=34, height=30,
                 font=ctk.CTkFont("Arial", 12),
@@ -479,7 +417,6 @@ class SpeakEasyGUI(ctk.CTk):
             )
             test_btn.place(x=740, y=9)
 
-            # [ADJUST HERE]: Delete button dimensions (width=34, height=30) and placement (x=785, y=9)
             del_btn = ctk.CTkButton(
                 row, text="✕", width=34, height=30,
                 font=ctk.CTkFont("Arial", 12),
@@ -495,7 +432,6 @@ class SpeakEasyGUI(ctk.CTk):
         self.count_lbl.configure(text=f"{shown} of {total} commands")
         self._update_cat_buttons()
 
-    # ── Interactions ─────────────────────────────
     def _select_row(self, phrase, cmd, cmd_str, cat):
         self.selected_phrase = phrase
         self.phrase_entry.delete(0, "end")
@@ -542,7 +478,6 @@ class SpeakEasyGUI(ctk.CTk):
             self._set_status("⚠  Phrase and Command are both required.", AMBER)
             return
 
-        # Save undo snapshot
         self.undo_stack.append(dict(self.commands_raw))
         if len(self.undo_stack) > 30:
             self.undo_stack.pop(0)

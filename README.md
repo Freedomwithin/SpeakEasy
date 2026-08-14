@@ -458,9 +458,11 @@ SpeakEasy was built primarily for older and low-spec Linux hardware. Feedback is
 
 If you find a bug, please include your hardware, Linux distribution/version, desktop environment, and whether you were using the AppImage or source installation.
 
-## License
+## Support
 
-MIT License - See LICENSE file for details.
+If you find SpeakEasy useful, consider buying me a coffee:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-freedomwithin-orange?style=flat-square&logo=buy-me-a-coffee)](https://buymeacoffee.com/freedomwithin)
 
 ## Hardware Notes
 
@@ -480,9 +482,6 @@ SpeakEasy is intended to remain useful on low-power systems:
 * **Audio:** PipeWire 1.0.5 or PulseAudio
 * Tested on Linux Mint 22.3 Zena / Cinnamon
 
-```
+## License
 
-**One note before you push:** I added the `SpeakEasy_Control_Center.png` reference because I think that screenshot would be valuable. **If that file doesn't exist in the repo yet, remove that one image line rather than pushing a broken image.** Everything else I'd consider ready.
-
-And then, seriously: **push it.** Don't spend another two hours making the README 1% better. 😄
-```
+MIT License - See LICENSE file for details.

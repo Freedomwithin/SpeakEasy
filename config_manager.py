@@ -125,6 +125,15 @@ def save_config(config):
     except Exception as e:
         print(f"❌ Error saving config: {e}")
 
+def speak(text, enabled=True):
+    """
+    No-op placeholder. Robot voice (espeak/spd-say) was removed in 1.2.2,
+    but settings_gui.py still imports and calls this after saving, so it
+    needs to exist here or the import fails and silently falls back to
+    stub load_config/save_config functions that never touch disk.
+    """
+    pass
+
 def show_gui_error(title, message):
     try:
         if subprocess.call(["which", "zenity"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:

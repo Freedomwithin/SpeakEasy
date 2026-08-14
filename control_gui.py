@@ -151,7 +151,6 @@ class SpeakEasyControlApp(ctk.CTk):
         launcher_script = SCRIPT_DIR / "Program_Launcher" / "voice_assistant.py"
         try:
             subprocess.Popen([sys.executable, str(launcher_script)])
-            self.send_notification("SpeakEasy", "🎯 Listening for app command...", timeout=2000)
         except Exception as e:
             show_gui_error("Launcher Error", f"Failed to start launcher: {e}")
 

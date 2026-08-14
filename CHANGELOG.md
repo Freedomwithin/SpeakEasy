@@ -2,6 +2,21 @@
 
 All notable changes to SpeakEasy will be documented in this file.
 
+## [1.2.5] - 2026-08-13
+
+### Added
+- **AppRun dependency guard** - Checks for `tkinter` and `sounddevice`/PortAudio before launching, showing a clear zenity/notify-send error (with the exact `apt install` command) instead of a silent failure when a system dependency is missing on the host machine
+
+## [1.2.4] - 2026-08-13
+
+### Fixed
+- **Program Launcher command matching** - Replaced raw substring `in` matching with word-boundary + longest-match-wins logic. Fixes short phrases (e.g. "kitty") incorrectly matching inside longer phrases that contain them (e.g. "open kitty config"), which was also the root cause behind commands appearing to randomly fire the wrong app
+- **Duplicate launcher instances** - Added a pgrep-based guard so a second `voice_assistant.py` won't start (and collide with) an already-running one on the same mic
+- **Notification timing** - Program Launcher now sends a single "🎙️ Voice Assistant Ready — start speaking" notification immediately when the mic opens, instead of a "Loading..." message followed by a separate "Ready" message that could arrive after a command had already fired (Fast Start lets commands fire before model load finishes, so the old two-step notification was narrating events out of order)
+
+### Added
+- **"repo" / "open repo" command** - Added as a more phonetically reliable alias for opening GitHub. The word "github" itself is inconsistently misheard by the small Vosk model (different wrong guess nearly every attempt); "repo" is a real, common word and lands consistently
+
 ## [1.2.3] - 2026-08-13
 
 ### Fixed
